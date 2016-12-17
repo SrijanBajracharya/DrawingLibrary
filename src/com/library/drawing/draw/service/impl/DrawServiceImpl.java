@@ -89,25 +89,25 @@ public class DrawServiceImpl implements DrawService {
         return drawLine(canvas, minX, minY, maxX, maxY);
     }
 
-    public char[][] drawRect(char[][] canvas, Map<String, Integer> coordinates) {
+    public char[][] drawLine(char[][] canvas, Map<String, Integer> coordinates) {
         Integer minX = coordinates.get("minX");
         Integer minY = coordinates.get("minY");
         Integer maxX = coordinates.get("maxX");
         Integer maxY = coordinates.get("maxY");
         for (int i = 0; i < canvas.length; i++) {
             for (int j = 0; j < canvas[i].length; j++) {
-                if (j == minX || j == maxX) {
-                    if (minY <= i && maxY >= i) {
-                        canvas[i][j] = '*';
+                if (j == minX) {
+                    if (minY <= i && i <= maxY) {
+                        canvas[i][j] = '+';
                     }
 
-                } else if (i == minY || i == maxY) {
-                    if (minX <= j && maxX >= j) {
-                        canvas[i][j] = '*';
+                } else if (i == maxY) {
+                    if (minX <= j && j <= maxX) {
+                        canvas[i][j] = '+';
                     }
                 }
-            }
 
+            }
         }
         return canvas;
     }
@@ -149,12 +149,44 @@ public class DrawServiceImpl implements DrawService {
         return canvas;
     }
 
+    public char[][] fill(char[][] canvas, Map<String, Integer> coordinates) {
+        Integer minX = coordinates.get("minX");
+        Integer minY = coordinates.get("minY");
+        Integer maxX = coordinates.get("maxX");
+        Integer maxY = coordinates.get("maxY");
+        for (int i = 0; i < canvas.length; i++) {
+            for (int j = 0; j < canvas[i].length; j++) {
+                if (j > minX && j < maxX) {
+                    if (minY < i && i < maxY) {
+                        canvas[i][j] = 'o';
+                    }
+
+                } else if (i > minY && i < maxY) {
+                    if (minX < j && maxX > j) {
+                        canvas[i][j] = 'o';
+                    }
+                }
+            }
+        }
+        return canvas;
+    }
+
     public Boolean isInsideRectangle(int x, int y, int x1, int y1, int x2, int y2) {
         if ((x >= x1 && x <= x2) && (y >= y1 && y <= y2)) {
             return true;
         }
         return false;
+    }
 
+    public Boolean isInsideRectangle(int x, int y, Map<String, Integer> coordinates) {
+        Integer minX = coordinates.get("minX");
+        Integer minY = coordinates.get("minY");
+        Integer maxX = coordinates.get("maxX");
+        Integer maxY = coordinates.get("maxY");
+        if ((x >= minX && x <= maxX) && (y >= minY && y <= maxY)) {
+            return true;
+        }
+        return false;
     }
 
 }
