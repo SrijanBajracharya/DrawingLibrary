@@ -6,6 +6,11 @@ import java.util.Scanner;
 import com.library.drawing.draw.helper.DrawHelper;
 import com.library.drawing.draw.service.impl.DrawServiceImpl;
 
+/**
+ * 
+ * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+ *
+ */
 public class DrawController {
 
     DrawServiceImpl drawServiceImpl = new DrawServiceImpl();
@@ -14,8 +19,14 @@ public class DrawController {
 
     char[][] canvas = new char[0][0];
 
+    /**
+     * main functions that handles all the commands
+     * 
+     * @param inputString
+     * @param character
+     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     */
     public void draw(String[] inputString, char character) {
-
         Scanner scanner = new Scanner(System.in);
         int arrayLength = inputString.length;
         char firstCharacter;
@@ -23,7 +34,7 @@ public class DrawController {
             if (arrayLength == 3 && (character == 'c' || character == 'C')) {
                 Integer width = Integer.parseInt(inputString[1]);
                 Integer height = Integer.parseInt(inputString[2]);
-                canvas = drawServiceImpl.createArray(width, height);
+                canvas = drawServiceImpl.drawCanvas(width, height);
                 drawServiceImpl.display(canvas);
                 do {
                     System.out.println("Enter command:");
@@ -48,19 +59,35 @@ public class DrawController {
         }
     }
 
+    /**
+     * Draws Rectangle
+     * 
+     * @param command
+     * @param width
+     * @param height
+     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     */
     public void drawRectangle(String[] command, int width, int height) {
         Integer x1 = Integer.parseInt(command[1]);
         Integer y1 = Integer.parseInt(command[2]);
         Integer x2 = Integer.parseInt(command[3]);
         Integer y2 = Integer.parseInt(command[4]);
         if (x1 >= 0 && x2 <= width && y1 >= 0 && y2 <= height) {
-            canvas = drawServiceImpl.drawRect(canvas, x1, y1, x2, y2);
+            canvas = drawServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
             drawServiceImpl.display(canvas);
         } else {
             System.out.println("Coordinates are outside the canvas boundary.");
         }
     }
 
+    /**
+     * Draws Line
+     * 
+     * @param command
+     * @param width
+     * @param height
+     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     */
     public void drawLine(String[] command, int width, int height) {
         Integer x1 = Integer.parseInt(command[1]);
         Integer y1 = Integer.parseInt(command[2]);
