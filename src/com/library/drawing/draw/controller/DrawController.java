@@ -36,6 +36,8 @@ public class DrawController {
                         drawRectangle(splitCommand, width, height);
                     } else if (Character.toLowerCase(firstCharacter) == 'b' && splitCommand.length == 4) {
 
+                    } else if (Character.toLowerCase(firstCharacter) == 'q') {
+                        System.out.println("Thank you for using our system.");
                     } else {
                         System.out.println("Please enter the valid command. Thank you");
                     }
