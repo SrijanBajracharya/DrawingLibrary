@@ -8,11 +8,16 @@ public class DrawingLibrary {
 
         System.out.println("Welcome to Draw Library");
         DrawServiceImpl drawServiceImpl = new DrawServiceImpl();
-        char[][] canvas = drawServiceImpl.createArray(10, 10);
+        char[][] canvas = drawServiceImpl.createArray(25, 25);
         drawServiceImpl.display(canvas);
-        char[][] rectAndCanvas = drawServiceImpl.drawRect(canvas, 1, 1, 3, 3);
+        char[][] rectAndCanvas = drawServiceImpl.drawRect(canvas, 4, 1, 8, 8);
         drawServiceImpl.display(rectAndCanvas);
-        char[][] lineAndCanvas = drawServiceImpl.drawLine(rectAndCanvas, 4, 4, 6, 6);
+        char[][] lineAndCanvas = drawServiceImpl.lineOperation(rectAndCanvas, 8, 7, 6, 4);
         drawServiceImpl.display(lineAndCanvas);
+        Boolean result = drawServiceImpl.isInsideRectangle(5, 3, 4, 1, 8, 8);
+        if (result) {
+            char[][] fillRect = drawServiceImpl.fill(lineAndCanvas, '0', 4, 1, 8, 8);
+            drawServiceImpl.display(fillRect);
+        }
     }
 }
