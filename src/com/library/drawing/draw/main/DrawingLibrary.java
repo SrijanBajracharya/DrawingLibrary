@@ -20,7 +20,7 @@ public class DrawingLibrary {
         // char[][] lineAndCanvas = drawServiceImpl.lineOperation(rectAndCanvas, 8, 7, 6, 4);
         char[][] lineAndCanvas = drawServiceImpl.drawLine(rectAndCanvas, coordinates);
         drawServiceImpl.display(lineAndCanvas);
-        Boolean result = drawServiceImpl.isInsideRectangle(5, 3, 4, 1, 8, 8);
+        Boolean result = drawServiceImpl.isInsideRectangle(5, 3, coordinates);
         System.out.println(result);
         if (result) {
             char[][] fillRect = drawServiceImpl.fill(lineAndCanvas, coordinates);

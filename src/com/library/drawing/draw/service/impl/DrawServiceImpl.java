@@ -72,23 +72,6 @@ public class DrawServiceImpl implements DrawService {
         return coordinates;
     }
 
-    public char[][] lineOperation(char[][] canvas, int x1, int y1, int x2, int y2) {
-        int maxY = y2;
-        int minY = y1;
-        int maxX = x1;
-        int minX = x2;
-        if (y1 > y2) {
-            maxY = y1;
-            minY = y2;
-        }
-        if (x1 > x2) {
-            maxX = x1;
-            minX = x2;
-        }
-
-        return drawLine(canvas, minX, minY, maxX, maxY);
-    }
-
     public char[][] drawLine(char[][] canvas, Map<String, Integer> coordinates) {
         Integer minX = coordinates.get("minX");
         Integer minY = coordinates.get("minY");
@@ -107,43 +90,6 @@ public class DrawServiceImpl implements DrawService {
                     }
                 }
 
-            }
-        }
-        return canvas;
-    }
-
-    public char[][] drawLine(char[][] canvas, int minX, int minY, int maxX, int maxY) {
-        for (int i = 0; i < canvas.length; i++) {
-            for (int j = 0; j < canvas[i].length; j++) {
-                if (j == minX) {
-                    if (minY <= i && i <= maxY) {
-                        canvas[i][j] = '+';
-                    }
-
-                } else if (i == maxY) {
-                    if (minX <= j && j <= maxX) {
-                        canvas[i][j] = '+';
-                    }
-                }
-
-            }
-        }
-        return canvas;
-    }
-
-    public char[][] fill(char[][] canvas, char c, int minX, int minY, int maxX, int maxY) {
-        for (int i = 0; i < canvas.length; i++) {
-            for (int j = 0; j < canvas[i].length; j++) {
-                if (j > minX && j < maxX) {
-                    if (minY < i && i < maxY) {
-                        canvas[i][j] = 'o';
-                    }
-
-                } else if (i > minY && i < maxY) {
-                    if (minX < j && maxX > j) {
-                        canvas[i][j] = 'o';
-                    }
-                }
             }
         }
         return canvas;
@@ -169,13 +115,6 @@ public class DrawServiceImpl implements DrawService {
             }
         }
         return canvas;
-    }
-
-    public Boolean isInsideRectangle(int x, int y, int x1, int y1, int x2, int y2) {
-        if ((x >= x1 && x <= x2) && (y >= y1 && y <= y2)) {
-            return true;
-        }
-        return false;
     }
 
     public Boolean isInsideRectangle(int x, int y, Map<String, Integer> coordinates) {
