@@ -94,6 +94,80 @@ public class DrawServiceImpl implements DrawService {
         return canvas;
     }
 
+    public char[][] collision(char[][] canvas, int x, int y) {
+        int width = canvas.length;
+        int height = canvas[0].length;
+        int xr = x;
+        int xl = x;
+        int yt = y;
+        int yb = y;
+        Boolean st = false;
+        Boolean sr = false;
+        Boolean sl = false;
+        Boolean sb = false;
+        while (true) {
+            if (canvas[xr][y] != ' ') {
+                break;
+            } else {
+                if (xr < width) {
+                    xr++;
+                    System.out.println(xr);
+                    System.out.println(canvas[2][2]);
+                } else {
+                    break;
+                }
+            }
+        }
+        System.out.println("first While");
+        while (true) {
+            if (canvas[xl][y] != ' ') {
+                break;
+            } else {
+                if (xl > 0) {
+                    xl--;
+                } else {
+                    break;
+                }
+            }
+
+        }
+        System.out.println("first While");
+        while (true) {
+            if (canvas[x][yt] != ' ') {
+                break;
+            } else {
+                if (yt > 0) {
+                    yt--;
+                } else {
+                    break;
+                }
+            }
+        }
+        System.out.println("second While");
+        while (true) {
+            if (canvas[x][yb] != ' ') {
+                break;
+            } else {
+                if (yb < height) {
+                    yb++;
+                } else {
+                    break;
+                }
+            }
+        }
+        System.out.println("second While");
+        System.out.println(xl + "xl" + xr + "xr");
+        System.out.println(yt + "xl" + yb + "xr");
+        for (int i = xl + 1; i < xr; i++) {
+            for (int j = yt + 1; j < yb; j++) {
+                if (canvas[i][j] == ' ') {
+                    canvas[i][j] = '#';
+                }
+            }
+        }
+        return canvas;
+    }
+
     public void floodFunction(char[][] canvas) {
         String map = "";
         StringBuilder stringBuilder = new StringBuilder();

@@ -107,7 +107,9 @@ public class DrawController {
         Integer y = Integer.parseInt(command[2]);
         char c = command[3].charAt(0);
         System.out.println("inside bubble fill");
-        drawServiceImpl.floodFunction(canvas);
+        canvas = drawServiceImpl.collision(canvas, x, y);
+        drawServiceImpl.display(canvas);
+
     }
 
 }

@@ -62,6 +62,8 @@ public class TestUnit1 {
         assertEquals('*', canvas[2][3]);
         assertEquals('*', canvas[3][2]);
         assertEquals('*', canvas[3][3]);
+        assertEquals('\0', canvas[1][1]);
+
     }
 
     @Test
@@ -77,6 +79,7 @@ public class TestUnit1 {
         assertEquals('-', canvas[2][2]);
         assertEquals('|', canvas[1][0]);
         assertEquals('|', canvas[1][2]);
+        assertEquals(' ', canvas[1][1]);
     }
 
     @Test
@@ -93,6 +96,7 @@ public class TestUnit1 {
         assertEquals('+', canvas[4][2]);
         assertEquals('+', canvas[4][3]);
         assertEquals('+', canvas[4][4]);
+        assertEquals('\0', canvas[1][1]);
     }
 
 }
