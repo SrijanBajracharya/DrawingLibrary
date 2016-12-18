@@ -115,6 +115,12 @@ public class DrawController {
         }
     }
 
+    /**
+     * handles functionality to fill the canvas
+     * 
+     * @param command
+     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     */
     public void drawBubbleFill(String[] command) {
         Integer x = Integer.parseInt(command[1]);
         Integer y = Integer.parseInt(command[2]);

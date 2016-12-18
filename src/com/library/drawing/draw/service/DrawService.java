@@ -46,8 +46,29 @@ public interface DrawService {
      */
     public char[][] drawLine(char[][] canvas, Map<String, Integer> coordinates);
 
-    char[][] collision(char[][] canvas, int x, int y, char c);
+    /**
+     * detects collision and fills
+     * 
+     * @param canvas
+     * @param x
+     * @param y
+     * @param c
+     * @return {@link Canvas}
+     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     */
+    public char[][] collision(char[][] canvas, int x, int y, char c);
 
-    char[][] removeFill(char[][] canvas, int x1, int y1, int x2, int y2);
+    /**
+     * removes unwanted fills
+     * 
+     * @param canvas
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @return {@link Canvas}
+     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     */
+    public char[][] removeFill(char[][] canvas, int x1, int y1, int x2, int y2);
 
 }

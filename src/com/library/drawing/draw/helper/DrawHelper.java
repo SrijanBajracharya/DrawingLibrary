@@ -54,6 +54,16 @@ public class DrawHelper {
         return coordinates;
     }
 
+    /**
+     * checks if the coordinates represent verticles of a rectangle or draws a straight line
+     * 
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @return {@link Boolean}
+     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     */
     public Boolean isRectangle(int x1, int y1, int x2, int y2) {
         Boolean isRectangle = true;
         if (x1 == x2 || y1 == y2) {
