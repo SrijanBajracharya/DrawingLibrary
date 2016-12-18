@@ -1,9 +1,12 @@
 package com.library.drawing.draw.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import com.library.drawing.draw.helper.DrawHelper;
+import com.library.drawing.draw.service.DrawService;
 import com.library.drawing.draw.service.impl.DrawServiceImpl;
 
 /**
@@ -13,11 +16,15 @@ import com.library.drawing.draw.service.impl.DrawServiceImpl;
  */
 public class DrawController {
 
-    DrawServiceImpl drawServiceImpl = new DrawServiceImpl();
+    DrawService drawServiceImpl = new DrawServiceImpl();
 
     DrawHelper drawHelper = new DrawHelper();
 
     char[][] canvas = new char[0][0];
+
+    List<String> rectangles = new ArrayList<>();
+
+    String userCommand;
 
     /**
      * main functions that handles all the commands
@@ -34,12 +41,12 @@ public class DrawController {
             if (arrayLength == 3 && (character == 'c' || character == 'C')) {
                 Integer width = Integer.parseInt(inputString[1]);
                 Integer height = Integer.parseInt(inputString[2]);
-                canvas = drawServiceImpl.drawCanvas(width, height);
+                canvas = drawServiceImpl.drawCanvas(height, width);
                 drawServiceImpl.display(canvas);
                 do {
                     System.out.println("Enter command:");
-                    String command = scanner.nextLine();
-                    String[] splitCommand = drawHelper.splitWhitespace(command);
+                    userCommand = scanner.nextLine();
+                    String[] splitCommand = drawHelper.splitWhitespace(userCommand);
                     firstCharacter = splitCommand[0].charAt(0);
                     if (Character.toLowerCase(firstCharacter) == 'l' && splitCommand.length == 5) {
                         drawLine(splitCommand, width, height);
@@ -73,6 +80,7 @@ public class DrawController {
         Integer x2 = Integer.parseInt(command[3]);
         Integer y2 = Integer.parseInt(command[4]);
         if (x1 >= 0 && x2 <= width && y1 >= 0 && y2 <= height) {
+            rectangles.add(userCommand);
             canvas = drawServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
             drawServiceImpl.display(canvas);
         } else {
@@ -106,8 +114,16 @@ public class DrawController {
         Integer x = Integer.parseInt(command[1]);
         Integer y = Integer.parseInt(command[2]);
         char c = command[3].charAt(0);
-        System.out.println("inside bubble fill");
-        canvas = drawServiceImpl.collision(canvas, x, y);
+        canvas = drawServiceImpl.collision(canvas, y, x, c);
+        for (String rectangle : rectangles) {
+            String[] splitCommand = drawHelper.splitWhitespace(rectangle);
+            Integer x1 = Integer.parseInt(splitCommand[1]);
+            Integer y1 = Integer.parseInt(splitCommand[2]);
+            Integer x2 = Integer.parseInt(splitCommand[3]);
+            Integer y2 = Integer.parseInt(splitCommand[4]);
+            canvas = drawServiceImpl.removeFill(canvas, x1, y1, x2, y2);
+        }
+
         drawServiceImpl.display(canvas);
 
     }

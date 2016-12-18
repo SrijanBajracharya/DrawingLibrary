@@ -7,13 +7,14 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.library.drawing.draw.helper.DrawHelper;
+import com.library.drawing.draw.service.DrawService;
 import com.library.drawing.draw.service.impl.DrawServiceImpl;
 
 public class TestUnit2 {
 
     DrawHelper drawHelper = new DrawHelper();
 
-    DrawServiceImpl drawServiceImpl = new DrawServiceImpl();
+    DrawService drawServiceImpl = new DrawServiceImpl();
 
     @Test
     public void convertToLowerCase() {
