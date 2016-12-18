@@ -100,4 +100,10 @@ public class TestUnit1 {
         assertEquals('\0', canvas[1][1]);
     }
 
+    @Test
+    public void testIsRectangle() {
+        Boolean isRectangle = drawHelper.isRectangle(9, 0, 9, 12);
+        assertEquals(Boolean.FALSE, isRectangle);
+    }
+
 }

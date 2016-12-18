@@ -79,12 +79,17 @@ public class DrawController {
         Integer y1 = Integer.parseInt(command[2]);
         Integer x2 = Integer.parseInt(command[3]);
         Integer y2 = Integer.parseInt(command[4]);
-        if (x1 >= 0 && x2 <= width && y1 >= 0 && y2 <= height) {
-            rectangles.add(userCommand);
-            canvas = drawServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
-            drawServiceImpl.display(canvas);
+        Boolean rectangle = drawHelper.isRectangle(x1, y1, x2, y2);
+        if (rectangle) {
+            if (x1 >= 0 && x2 <= width && y1 >= 0 && y2 <= height) {
+                rectangles.add(userCommand);
+                canvas = drawServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
+                drawServiceImpl.display(canvas);
+            } else {
+                System.out.println("Coordinates are outside the canvas boundary.");
+            }
         } else {
-            System.out.println("Coordinates are outside the canvas boundary.");
+            System.out.println("Warning: You are trying to draw a straight line");
         }
     }
 
@@ -123,9 +128,7 @@ public class DrawController {
             Integer y2 = Integer.parseInt(splitCommand[4]);
             canvas = drawServiceImpl.removeFill(canvas, x1, y1, x2, y2);
         }
-
         drawServiceImpl.display(canvas);
-
     }
 
 }

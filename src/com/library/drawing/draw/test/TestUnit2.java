@@ -69,4 +69,10 @@ public class TestUnit2 {
         assertEquals('*', canvas[4][4]);
     }
 
+    @Test
+    public void testIsRectangle() {
+        Boolean isRectangle = drawHelper.isRectangle(9, 0, 3, 12);
+        assertEquals(Boolean.TRUE, isRectangle);
+    }
+
 }

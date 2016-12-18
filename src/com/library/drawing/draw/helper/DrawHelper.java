@@ -54,4 +54,12 @@ public class DrawHelper {
         return coordinates;
     }
 
+    public Boolean isRectangle(int x1, int y1, int x2, int y2) {
+        Boolean isRectangle = true;
+        if (x1 == x2 || y1 == y2) {
+            isRectangle = false;
+        }
+        return isRectangle;
+    }
+
 }
