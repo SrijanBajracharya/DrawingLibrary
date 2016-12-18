@@ -37,8 +37,8 @@ public class DrawHelper {
         Map<String, Integer> coordinates = new HashMap<>();
         int maxY = y2;
         int minY = y1;
-        int maxX = x1;
-        int minX = x2;
+        int minX = x1;
+        int maxX = x2;
         if (y1 > y2) {
             maxY = y1;
             minY = y2;
