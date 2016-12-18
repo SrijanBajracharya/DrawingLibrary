@@ -1,6 +1,5 @@
 package com.library.drawing.draw.service.impl;
 
-import java.awt.Canvas;
 import java.util.Map;
 
 import com.library.drawing.draw.service.DrawService;
@@ -13,13 +12,9 @@ import com.library.drawing.draw.service.DrawService;
 public class DrawServiceImpl implements DrawService {
 
     /**
-     * creates canvas array
-     * 
-     * @param width
-     * @param height
-     * @return {@link Canvas}
-     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     * {@inheritDoc}
      */
+    @Override
     public char[][] drawCanvas(int width, int height) {
         char[][] canvas = new char[width][height];
         for (int x = 0; x < width; x++) {
@@ -37,11 +32,9 @@ public class DrawServiceImpl implements DrawService {
     }
 
     /**
-     * draws different figures
-     * 
-     * @param canvas
-     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     * {@inheritDoc}
      */
+    @Override
     public void display(char[][] canvas) {
         for (int i = 0; i < canvas.length; i++) {
             for (int j = 0; j < canvas[i].length; j++) {
@@ -52,16 +45,9 @@ public class DrawServiceImpl implements DrawService {
     }
 
     /**
-     * inserts "*" to a multidimensional array to draw rectangle
-     * 
-     * @param canvas
-     * @param x1
-     * @param y1
-     * @param x2
-     * @param y2
-     * @return {@link Canvas}
-     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     * {@inheritDoc}
      */
+    @Override
     public char[][] drawRectangle(char[][] canvas, int x1, int y1, int x2, int y2) {
         for (int i = 0; i < canvas.length; i++) {
             for (int j = 0; j < canvas[i].length; j++) {
@@ -82,13 +68,9 @@ public class DrawServiceImpl implements DrawService {
     }
 
     /**
-     * Inserts "+" to a multi dimensional array
-     * 
-     * @param canvas
-     * @param coordinates
-     * @return {@link Canvas}
-     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     * {@inheritDoc}
      */
+    @Override
     public char[][] drawLine(char[][] canvas, Map<String, Integer> coordinates) {
         Integer minX = coordinates.get("minX");
         Integer minY = coordinates.get("minY");
