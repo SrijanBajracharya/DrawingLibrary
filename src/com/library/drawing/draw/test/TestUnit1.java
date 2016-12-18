@@ -2,6 +2,7 @@ package com.library.drawing.draw.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -76,6 +77,22 @@ public class TestUnit1 {
         assertEquals('-', canvas[2][2]);
         assertEquals('|', canvas[1][0]);
         assertEquals('|', canvas[1][2]);
+    }
+
+    @Test
+    public void testLine() {
+        char[][] canvas = new char[5][5];
+        Map<String, Integer> coordinates = new HashMap<>();
+        coordinates.put("minX", 2);
+        coordinates.put("maxY", 4);
+        coordinates.put("maxX", 4);
+        coordinates.put("minY", 2);
+        canvas = drawServiceImpl.drawLine(canvas, coordinates);
+        assertEquals('+', canvas[2][2]);
+        assertEquals('+', canvas[3][2]);
+        assertEquals('+', canvas[4][2]);
+        assertEquals('+', canvas[4][3]);
+        assertEquals('+', canvas[4][4]);
     }
 
 }
