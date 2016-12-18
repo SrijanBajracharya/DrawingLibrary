@@ -112,6 +112,51 @@ public class DrawServiceImpl implements DrawService {
         return canvas;
     }
 
+    public void floodFunction(char[][] canvas) {
+        String map = "";
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < canvas.length; i++) {
+            for (int j = 0; j < canvas[i].length; j++) {
+                char character = canvas[i][j];
+                map += stringBuilder.append(Character.toString(character));
+            }
+        }
+        System.out.print(map + "map");
+        String[] lines = map.split("|");
+        canvas = new char[lines.length][lines[0].length()];
+        for (int j = 0; j < canvas.length; j++)
+            for (int i = 0; i < canvas[j].length; i++)
+                canvas[j][i] = lines[j].charAt(i);
+
+        int count = floodCount(canvas, new boolean[canvas.length][canvas[0].length], 2, 8); // row 2, 8 is where the 's' is
+
+        for (int j = 0; j < canvas.length; j++) {
+            for (int i = 0; i < canvas[j].length; i++)
+                System.out.print(canvas[j][i]);
+            System.out.println();
+        }
+
+        System.out.println(count);
+    }
+
+    public int floodCount(char[][] canvas, boolean[][] visited, int r, int c) {
+        if (r < 0 || r >= canvas.length || c < 0 || c >= canvas[0].length)
+            return 0;
+        if (visited[r][c])
+            return 0;
+        visited[r][c] = true;
+        if (canvas[r][c] == '*')
+            return 0;
+        int out = 0;
+        if (canvas[r][c] == '+')
+            out++;
+        out += floodCount(canvas, visited, r + 1, c);
+        out += floodCount(canvas, visited, r - 1, c);
+        out += floodCount(canvas, visited, r, c + 1);
+        out += floodCount(canvas, visited, r, c - 1);
+        return out;
+    }
+
     public char[][] fillAll(char[][] canvas) {
         for (int i = 0; i < canvas.length; i++) {
             for (int j = 0; j < canvas[i].length; j++) {

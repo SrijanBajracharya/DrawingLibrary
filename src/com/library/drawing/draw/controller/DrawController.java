@@ -46,7 +46,7 @@ public class DrawController {
                     } else if (Character.toLowerCase(firstCharacter) == 'r' && splitCommand.length == 5) {
                         drawRectangle(splitCommand, width, height);
                     } else if (Character.toLowerCase(firstCharacter) == 'b' && splitCommand.length == 4) {
-
+                        drawBubbleFill(splitCommand);
                     } else if (Character.toLowerCase(firstCharacter) == 'q') {
                         System.out.println("Thank you for using our system.");
                     } else {
@@ -105,8 +105,9 @@ public class DrawController {
     public void drawBubbleFill(String[] command) {
         Integer x = Integer.parseInt(command[1]);
         Integer y = Integer.parseInt(command[2]);
-        char c = command[3].charAt(3);
+        char c = command[3].charAt(0);
         System.out.println("inside bubble fill");
+        drawServiceImpl.floodFunction(canvas);
     }
 
 }
