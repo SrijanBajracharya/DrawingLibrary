@@ -8,12 +8,13 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.library.drawing.draw.helper.DrawHelper;
+import com.library.drawing.draw.service.DrawService;
 import com.library.drawing.draw.service.impl.DrawServiceImpl;
 
 public class TestUnit1 {
 
     DrawHelper drawHelper = new DrawHelper();
-    DrawServiceImpl drawServiceImpl = new DrawServiceImpl();
+    DrawService drawServiceImpl = new DrawServiceImpl();
 
     @Test
     public void convertToLowerCase() {
@@ -62,6 +63,8 @@ public class TestUnit1 {
         assertEquals('*', canvas[2][3]);
         assertEquals('*', canvas[3][2]);
         assertEquals('*', canvas[3][3]);
+        assertEquals('\0', canvas[1][1]);
+
     }
 
     @Test
@@ -77,6 +80,7 @@ public class TestUnit1 {
         assertEquals('-', canvas[2][2]);
         assertEquals('|', canvas[1][0]);
         assertEquals('|', canvas[1][2]);
+        assertEquals(' ', canvas[1][1]);
     }
 
     @Test
@@ -93,6 +97,7 @@ public class TestUnit1 {
         assertEquals('+', canvas[4][2]);
         assertEquals('+', canvas[4][3]);
         assertEquals('+', canvas[4][4]);
+        assertEquals('\0', canvas[1][1]);
     }
 
 }
