@@ -77,6 +77,7 @@ public class TestUnit2 {
         assertEquals('*', canvas[4][2]);
         assertEquals('*', canvas[4][3]);
         assertEquals('*', canvas[4][4]);
+        assertEquals('\0', canvas[1][1]);
     }
 
     @Test

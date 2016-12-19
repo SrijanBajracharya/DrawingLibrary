@@ -100,11 +100,11 @@ public class TestUnit1 {
         coordinates.put("maxY", 4);
         coordinates.put("maxX", 4);
         coordinates.put("minY", 2);
-        canvas = lineServiceImpl.drawLine(canvas, coordinates);
+        canvas = lineServiceImpl.line(canvas, coordinates);
         assertEquals('+', canvas[2][2]);
-        assertEquals('+', canvas[3][2]);
-        assertEquals('+', canvas[4][2]);
-        assertEquals('+', canvas[4][3]);
+        assertEquals('+', canvas[2][3]);
+        assertEquals('+', canvas[2][4]);
+        assertEquals('+', canvas[3][4]);
         assertEquals('+', canvas[4][4]);
         assertEquals('\0', canvas[1][1]);
     }
