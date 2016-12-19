@@ -54,13 +54,6 @@ public class TestUnit1 {
     }
 
     @Test
-    public void testRemoveUnwantedWhiteSpace() {
-        String input = "l    14          15";
-        input = input.trim().replaceAll(" +", " ");
-        assertEquals("l 14 15", input);
-    }
-
-    @Test
     public void testDrawRectangle() {
         char[][] canvas = new char[5][5];
         int x1 = 2;

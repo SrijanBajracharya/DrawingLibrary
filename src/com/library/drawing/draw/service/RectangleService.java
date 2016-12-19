@@ -18,5 +18,5 @@ public interface RectangleService {
      */
     public char[][] drawRectangle(char[][] canvas, int x1, int y1, int x2, int y2);
 
-    Boolean isInsideRectangle(int x, int y, Map<String, Integer> coordinates);
+    public Boolean isInsideRectangle(int x, int y, Map<String, Integer> coordinates);
 }
