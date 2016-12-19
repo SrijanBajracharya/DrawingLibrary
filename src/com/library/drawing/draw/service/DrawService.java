@@ -37,16 +37,6 @@ public interface DrawService {
     public char[][] drawRectangle(char[][] canvas, int x1, int y1, int x2, int y2);
 
     /**
-     * Inserts "+" to a multi dimensional array
-     * 
-     * @param canvas
-     * @param coordinates
-     * @return {@link Canvas}
-     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
-     */
-    public char[][] drawLine(char[][] canvas, Map<String, Integer> coordinates);
-
-    /**
      * detects collision and fills
      * 
      * @param canvas
@@ -70,5 +60,15 @@ public interface DrawService {
      * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
      */
     public char[][] removeFill(char[][] canvas, int x1, int y1, int x2, int y2);
+
+    char[][] fillAll(char[][] canvas, char c);
+
+    char[][] removeLineFill(char[][] canvas, int x1, int y1, int x2, int y2, int width, int height);
+
+    Boolean isInsideRectangle(int x, int y, Map<String, Integer> coordinates);
+
+    char[][] drawLine(char[][] canvas, Map<String, Integer> coordinates);
+
+    char[][] line(char[][] canvas, Map<String, Integer> coordinates);
 
 }
