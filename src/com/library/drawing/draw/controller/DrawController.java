@@ -183,12 +183,12 @@ public class DrawController {
 
                 } else {
                     canvas = drawServiceImpl.fillAll(canvas, c);
-                    canvas = drawServiceImpl.removeFill(canvas, x1, y1, x2, y2);
+                    canvas = drawServiceImpl.removeFill(canvas, coordinates);
                 }
 
             } else if (Character.toLowerCase(firstCharacter) == 'l') {
                 canvas = drawServiceImpl.fillAll(canvas, c);
-                canvas = lineServiceImpl.removeLineFill(canvas, x1, y1, x2, y2, width, height);
+                canvas = lineServiceImpl.removeLineFill(canvas, coordinates, width, height);
             }
             displayServiceImpl.display(canvas);
         }

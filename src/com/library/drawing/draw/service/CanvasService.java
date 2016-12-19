@@ -2,6 +2,11 @@ package com.library.drawing.draw.service;
 
 import java.awt.Canvas;
 
+/**
+ * 
+ * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+ *
+ */
 public interface CanvasService {
 
     /**

@@ -8,5 +8,5 @@ public interface LineService {
 
     char[][] line(char[][] canvas, Map<String, Integer> coordinates);
 
-    char[][] removeLineFill(char[][] canvas, int x1, int y1, int x2, int y2, int width, int height);
+    char[][] removeLineFill(char[][] canvas, Map<String, Integer> coordinates, int width, int height);
 }

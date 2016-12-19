@@ -1,5 +1,7 @@
 package com.library.drawing.draw.service.impl;
 
+import java.util.Map;
+
 import com.library.drawing.draw.service.DrawService;
 
 /**
@@ -81,19 +83,11 @@ public class DrawServiceImpl implements DrawService {
     }
 
     @Override
-    public char[][] removeFill(char[][] canvas, int x1, int y1, int x2, int y2) {
-        int minX = x1;
-        int minY = y1;
-        int maxX = x2;
-        int maxY = y2;
-        if (y1 > y2) {
-            maxY = y1;
-            minY = y2;
-        }
-        if (x1 > x2) {
-            maxX = x1;
-            minX = x2;
-        }
+    public char[][] removeFill(char[][] canvas, Map<String, Integer> coordinates) {
+        Integer minX = coordinates.get("minX");
+        Integer minY = coordinates.get("minY");
+        Integer maxX = coordinates.get("maxX");
+        Integer maxY = coordinates.get("maxY");
         for (int i = minY + 1; i < maxY; i++) {
             for (int j = minX + 1; j < maxX; j++) {
                 canvas[i][j] = ' ';

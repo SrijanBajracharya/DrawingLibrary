@@ -1,6 +1,7 @@
 package com.library.drawing.draw.service;
 
 import java.awt.Canvas;
+import java.util.Map;
 
 public interface DrawService {
 
@@ -27,7 +28,7 @@ public interface DrawService {
      * @return {@link Canvas}
      * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
      */
-    public char[][] removeFill(char[][] canvas, int x1, int y1, int x2, int y2);
+    public char[][] removeFill(char[][] canvas, Map<String, Integer> coordinates);
 
     char[][] fillAll(char[][] canvas, char c);
 
