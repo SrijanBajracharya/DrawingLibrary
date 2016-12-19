@@ -8,13 +8,22 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.library.drawing.draw.helper.DrawHelper;
+import com.library.drawing.draw.service.CanvasService;
 import com.library.drawing.draw.service.DrawService;
+import com.library.drawing.draw.service.LineService;
+import com.library.drawing.draw.service.RectangleService;
+import com.library.drawing.draw.service.impl.CanvasServiceImpl;
 import com.library.drawing.draw.service.impl.DrawServiceImpl;
+import com.library.drawing.draw.service.impl.LineServiceImpl;
+import com.library.drawing.draw.service.impl.RectangleServiceImpl;
 
 public class TestUnit1 {
 
     DrawHelper drawHelper = new DrawHelper();
     DrawService drawServiceImpl = new DrawServiceImpl();
+    RectangleService rectangleServiceImpl = new RectangleServiceImpl();
+    LineService lineServiceImpl = new LineServiceImpl();
+    CanvasService canvasServiceImpl = new CanvasServiceImpl();
 
     @Test
     public void convertToLowerCase() {
@@ -58,7 +67,7 @@ public class TestUnit1 {
         int y1 = 2;
         int x2 = 3;
         int y2 = 3;
-        canvas = drawServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
+        canvas = rectangleServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
         assertEquals('*', canvas[2][2]);
         assertEquals('*', canvas[2][3]);
         assertEquals('*', canvas[3][2]);
@@ -71,7 +80,7 @@ public class TestUnit1 {
     public void testCanvas() {
         int width = 3;
         int height = 3;
-        char[][] canvas = drawServiceImpl.drawCanvas(width, height);
+        char[][] canvas = canvasServiceImpl.drawCanvas(width, height);
         assertEquals('-', canvas[0][0]);
         assertEquals('-', canvas[0][1]);
         assertEquals('-', canvas[0][2]);
@@ -91,7 +100,7 @@ public class TestUnit1 {
         coordinates.put("maxY", 4);
         coordinates.put("maxX", 4);
         coordinates.put("minY", 2);
-        canvas = drawServiceImpl.drawLine(canvas, coordinates);
+        canvas = lineServiceImpl.drawLine(canvas, coordinates);
         assertEquals('+', canvas[2][2]);
         assertEquals('+', canvas[3][2]);
         assertEquals('+', canvas[4][2]);

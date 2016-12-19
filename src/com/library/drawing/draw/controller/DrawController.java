@@ -6,8 +6,16 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.library.drawing.draw.helper.DrawHelper;
+import com.library.drawing.draw.service.CanvasService;
+import com.library.drawing.draw.service.DisplayService;
 import com.library.drawing.draw.service.DrawService;
+import com.library.drawing.draw.service.LineService;
+import com.library.drawing.draw.service.RectangleService;
+import com.library.drawing.draw.service.impl.CanvasServiceImpl;
+import com.library.drawing.draw.service.impl.DisplayServiceImpl;
 import com.library.drawing.draw.service.impl.DrawServiceImpl;
+import com.library.drawing.draw.service.impl.LineServiceImpl;
+import com.library.drawing.draw.service.impl.RectangleServiceImpl;
 
 /**
  * 
@@ -16,7 +24,15 @@ import com.library.drawing.draw.service.impl.DrawServiceImpl;
  */
 public class DrawController {
 
+    CanvasService canvasServiceImpl = new CanvasServiceImpl();
+
     DrawService drawServiceImpl = new DrawServiceImpl();
+
+    DisplayService displayServiceImpl = new DisplayServiceImpl();
+
+    RectangleService rectangleServiceImpl = new RectangleServiceImpl();
+
+    LineService lineServiceImpl = new LineServiceImpl();
 
     DrawHelper drawHelper = new DrawHelper();
 
@@ -45,8 +61,8 @@ public class DrawController {
             if (arrayLength == 3 && (character == 'c' || character == 'C')) {
                 width = Integer.parseInt(inputString[1]);
                 height = Integer.parseInt(inputString[2]);
-                canvas = drawServiceImpl.drawCanvas(height, width);
-                drawServiceImpl.display(canvas);
+                canvas = canvasServiceImpl.drawCanvas(height, width);
+                displayServiceImpl.display(canvas);
                 do {
                     System.out.println("Enter command:");
                     userCommand = scanner.nextLine();
@@ -87,8 +103,8 @@ public class DrawController {
         if (rectangle) {
             if (x1 >= 0 && x2 <= width && y1 >= 0 && y2 <= height) {
                 rectangles.add(userCommand);
-                canvas = drawServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
-                drawServiceImpl.display(canvas);
+                canvas = rectangleServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
+                displayServiceImpl.display(canvas);
             } else {
                 System.out.println("Coordinates are outside the canvas boundary.");
             }
@@ -118,13 +134,13 @@ public class DrawController {
         if (((minX == 0 || maxX == width - 1) && (minY == 0 || maxY == height - 1))
                 || ((maxY == height - 1 || minY == 0) && (minX == 0 || maxX == width - 1))) {
             lines.add(userCommand);
-            canvas = drawServiceImpl.drawLine(canvas, coordinates);
+            canvas = lineServiceImpl.drawLine(canvas, coordinates);
         } else if (minX < 0 || maxX >= width || minY < 0 || maxY >= height) {
             System.out.println("Coordinates are outside the canvas boundary.");
         } else {
-            canvas = drawServiceImpl.line(canvas, coordinates);
+            canvas = lineServiceImpl.line(canvas, coordinates);
         }
-        drawServiceImpl.display(canvas);
+        displayServiceImpl.display(canvas);
     }
 
     /**
@@ -161,7 +177,7 @@ public class DrawController {
             Integer y2 = Integer.parseInt(splitCommand[4]);
             coordinates = drawHelper.getMaxMin(x1, y1, x2, y2);
             if (Character.toLowerCase(firstCharacter) == 'r') {
-                Boolean isInsideRectangle = drawServiceImpl.isInsideRectangle(x, y, coordinates);
+                Boolean isInsideRectangle = rectangleServiceImpl.isInsideRectangle(x, y, coordinates);
                 if (isInsideRectangle) {
                     canvas = drawServiceImpl.collision(canvas, y, x, c);
 
@@ -172,9 +188,9 @@ public class DrawController {
 
             } else if (Character.toLowerCase(firstCharacter) == 'l') {
                 canvas = drawServiceImpl.fillAll(canvas, c);
-                canvas = drawServiceImpl.removeLineFill(canvas, x1, y1, x2, y2, width, height);
+                canvas = lineServiceImpl.removeLineFill(canvas, x1, y1, x2, y2, width, height);
             }
-            drawServiceImpl.display(canvas);
+            displayServiceImpl.display(canvas);
         }
     }
 

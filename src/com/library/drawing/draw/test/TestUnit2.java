@@ -7,14 +7,24 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.library.drawing.draw.helper.DrawHelper;
+import com.library.drawing.draw.service.CanvasService;
 import com.library.drawing.draw.service.DrawService;
+import com.library.drawing.draw.service.LineService;
+import com.library.drawing.draw.service.RectangleService;
+import com.library.drawing.draw.service.impl.CanvasServiceImpl;
 import com.library.drawing.draw.service.impl.DrawServiceImpl;
+import com.library.drawing.draw.service.impl.LineServiceImpl;
+import com.library.drawing.draw.service.impl.RectangleServiceImpl;
 
 public class TestUnit2 {
 
     DrawHelper drawHelper = new DrawHelper();
 
     DrawService drawServiceImpl = new DrawServiceImpl();
+
+    RectangleService rectangleServiceImpl = new RectangleServiceImpl();
+    LineService lineServiceImpl = new LineServiceImpl();
+    CanvasService canvasServiceImpl = new CanvasServiceImpl();
 
     @Test
     public void convertToLowerCase() {
@@ -58,7 +68,7 @@ public class TestUnit2 {
         int y1 = 2;
         int x2 = 4;
         int y2 = 4;
-        canvas = drawServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
+        canvas = rectangleServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
         assertEquals('*', canvas[2][2]);
         assertEquals('*', canvas[2][3]);
         assertEquals('*', canvas[2][4]);
