@@ -34,8 +34,6 @@ public class DrawController {
 
     LineService lineServiceImpl = new LineServiceImpl();
 
-    DrawHelper drawHelper = new DrawHelper();
-
     char[][] canvas = new char[0][0];
 
     List<String> rectangles = new ArrayList<>();
@@ -66,7 +64,7 @@ public class DrawController {
                 do {
                     System.out.println("Enter command:");
                     userCommand = scanner.nextLine();
-                    String[] splitCommand = drawHelper.splitWhitespace(userCommand);
+                    String[] splitCommand = DrawHelper.splitWhitespace(userCommand);
                     firstCharacter = splitCommand[0].charAt(0);
                     if (Character.toLowerCase(firstCharacter) == 'l' && splitCommand.length == 5) {
                         drawLine(splitCommand, width, height);
@@ -99,7 +97,7 @@ public class DrawController {
         Integer y1 = Integer.parseInt(command[2]);
         Integer x2 = Integer.parseInt(command[3]);
         Integer y2 = Integer.parseInt(command[4]);
-        Boolean rectangle = drawHelper.isRectangle(x1, y1, x2, y2);
+        Boolean rectangle = DrawHelper.isRectangle(x1, y1, x2, y2);
         if (rectangle) {
             if (x1 >= 0 && x2 <= width && y1 >= 0 && y2 <= height) {
                 rectangles.add(userCommand);
@@ -126,15 +124,15 @@ public class DrawController {
         Integer y1 = Integer.parseInt(command[2]);
         Integer x2 = Integer.parseInt(command[3]);
         Integer y2 = Integer.parseInt(command[4]);
-        Map<String, Integer> coordinates = drawHelper.getMaxMin(x1, y1, x2, y2);
+        Map<String, Integer> coordinates = DrawHelper.getMaxMin(x1, y1, x2, y2);
         Integer minX = coordinates.get("minX");
         Integer minY = coordinates.get("minY");
         Integer maxX = coordinates.get("maxX");
         Integer maxY = coordinates.get("maxY");
         if (((minX == 0 || maxX == width - 1) && (minY == 0 || maxY == height - 1))
                 || ((maxY == height - 1 || minY == 0) && (minX == 0 || maxX == width - 1))) {
-            lines.add(userCommand);
             canvas = lineServiceImpl.drawLine(canvas, coordinates);
+            rectangles.add("r" + " " + x1 + " " + y1 + " " + x2 + " " + y2);
         } else if (minX < 0 || maxX >= width || minY < 0 || maxY >= height) {
             System.out.println("Coordinates are outside the canvas boundary.");
         } else {
@@ -153,44 +151,47 @@ public class DrawController {
         Integer x = Integer.parseInt(command[1]);
         Integer y = Integer.parseInt(command[2]);
         char c = command[3].charAt(0);
+        canvas = drawServiceImpl.fillAll(canvas, c);
         drawBubble(rectangles, x, y, c);
         drawBubble(lines, x, y, c);
-        /*
-         * canvas = drawServiceImpl.collision(canvas, y, x, c); canvas = drawServiceImpl.fillAll(canvas, c); for (String rectangle :
-         * rectangles) { String[] splitCommand = drawHelper.splitWhitespace(rectangle); Integer x1 = Integer.parseInt(splitCommand[1]);
-         * Integer y1 = Integer.parseInt(splitCommand[2]); Integer x2 = Integer.parseInt(splitCommand[3]); Integer y2 =
-         * Integer.parseInt(splitCommand[4]); canvas = drawServiceImpl.removeFill(canvas, x1, y1, x2, y2); }
-         * 
-         * canvas = drawServiceImpl.removeFill(canvas, 6, 0, 11, 3);
-         */
-
     }
 
     public void drawBubble(List<String> figures, int x, int y, char c) {
         Map<String, Integer> coordinates;
         for (String figure : figures) {
-            String[] splitCommand = drawHelper.splitWhitespace(figure);
+            String[] splitCommand = DrawHelper.splitWhitespace(figure);
             char firstCharacter = splitCommand[0].charAt(0);
             Integer x1 = Integer.parseInt(splitCommand[1]);
             Integer y1 = Integer.parseInt(splitCommand[2]);
             Integer x2 = Integer.parseInt(splitCommand[3]);
             Integer y2 = Integer.parseInt(splitCommand[4]);
-            coordinates = drawHelper.getMaxMin(x1, y1, x2, y2);
+            coordinates = DrawHelper.getMaxMin(x1, y1, x2, y2);
+
             if (Character.toLowerCase(firstCharacter) == 'r') {
                 Boolean isInsideRectangle = rectangleServiceImpl.isInsideRectangle(x, y, coordinates);
                 if (isInsideRectangle) {
+                    remove(c);
                     canvas = drawServiceImpl.collision(canvas, y, x, c);
-                    displayServiceImpl.display(canvas);
                     break;
-                } /*
-                   * else { canvas = drawServiceImpl.fillAll(canvas, c); canvas = drawServiceImpl.removeFill(canvas, coordinates); }
-                   */
+                } else {
+                    canvas = drawServiceImpl.removeFill(canvas, coordinates);
+                }
 
             } else if (Character.toLowerCase(firstCharacter) == 'l') {
-                canvas = drawServiceImpl.fillAll(canvas, c);
                 canvas = lineServiceImpl.removeLineFill(canvas, coordinates, width, height);
             }
-            displayServiceImpl.display(canvas);
+        }
+
+        displayServiceImpl.display(canvas);
+    }
+
+    public void remove(char c) {
+        for (int i = 0; i < canvas.length; i++) {
+            for (int j = 0; j < canvas[i].length; j++) {
+                if (canvas[i][j] == c) {
+                    canvas[i][j] = ' ';
+                }
+            }
         }
     }
 
