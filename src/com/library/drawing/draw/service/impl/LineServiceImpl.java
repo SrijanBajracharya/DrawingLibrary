@@ -48,12 +48,12 @@ public class LineServiceImpl implements LineService {
         Integer maxY = coordinates.get("maxY");
         for (int i = 0; i < canvas.length; i++) {
             for (int j = 0; j < canvas[i].length; j++) {
-                if (j == minX) {
+                if (j == maxX) {
                     if (minY <= i && i <= maxY) {
                         canvas[i][j] = '+';
                     }
 
-                } else if (i == maxY) {
+                } else if (i == minY) {
                     if (minX <= j && j <= maxX) {
                         canvas[i][j] = '+';
                     }
