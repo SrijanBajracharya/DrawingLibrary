@@ -18,7 +18,7 @@ public class DrawHelper {
      * @return {@link String} {@link Array}
      * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
      */
-    public String[] splitWhitespace(String input) {
+    public static String[] splitWhitespace(String input) {
         input = input.trim().replaceAll(" +", " ");
         return input.split(" ");
     }
@@ -33,7 +33,7 @@ public class DrawHelper {
      * @return {@link Map}
      * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
      */
-    public Map<String, Integer> getMaxMin(int x1, int y1, int x2, int y2) {
+    public static Map<String, Integer> getMaxMin(int x1, int y1, int x2, int y2) {
         Map<String, Integer> coordinates = new HashMap<>();
         int maxY = y2;
         int minY = y1;
@@ -64,7 +64,7 @@ public class DrawHelper {
      * @return {@link Boolean}
      * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
      */
-    public Boolean isRectangle(int x1, int y1, int x2, int y2) {
+    public static Boolean isRectangle(int x1, int y1, int x2, int y2) {
         Boolean isRectangle = true;
         if (x1 == x2 || y1 == y2) {
             isRectangle = false;

@@ -16,8 +16,7 @@ public class DrawingLibrary {
         System.out.println(" 5.To Quit: q");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        DrawHelper helper = new DrawHelper();
-        String[] splitString = helper.splitWhitespace(input);
+        String[] splitString = DrawHelper.splitWhitespace(input);
         char character = splitString[0].charAt(0);
         if (Character.toLowerCase(character) != 'c') {
             System.out.println("First of all you need to draw a canvas. Thank you");

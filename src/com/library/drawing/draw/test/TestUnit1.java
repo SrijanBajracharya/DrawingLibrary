@@ -19,7 +19,6 @@ import com.library.drawing.draw.service.impl.RectangleServiceImpl;
 
 public class TestUnit1 {
 
-    DrawHelper drawHelper = new DrawHelper();
     DrawService drawServiceImpl = new DrawServiceImpl();
     RectangleService rectangleServiceImpl = new RectangleServiceImpl();
     LineService lineServiceImpl = new LineServiceImpl();
@@ -33,7 +32,7 @@ public class TestUnit1 {
 
     @Test
     public void testGetMaxMin() {
-        Map<String, Integer> coordinates = drawHelper.getMaxMin(7, 9, 3, 2);
+        Map<String, Integer> coordinates = DrawHelper.getMaxMin(7, 9, 3, 2);
         int minX = coordinates.get("minX");
         int minY = coordinates.get("minY");
         int maxX = coordinates.get("maxX");
@@ -47,7 +46,7 @@ public class TestUnit1 {
     @Test
     public void testSplitWhitespace() {
         String input = " c  13   34";
-        String[] result = drawHelper.splitWhitespace(input);
+        String[] result = DrawHelper.splitWhitespace(input);
         assertEquals("c", result[0]);
         assertEquals("13", result[1]);
         assertEquals("34", result[2]);
@@ -119,7 +118,7 @@ public class TestUnit1 {
 
     @Test
     public void testIsRectangle() {
-        Boolean isRectangle = drawHelper.isRectangle(9, 0, 9, 12);
+        Boolean isRectangle = DrawHelper.isRectangle(9, 0, 9, 12);
         assertEquals(Boolean.FALSE, isRectangle);
     }
 
