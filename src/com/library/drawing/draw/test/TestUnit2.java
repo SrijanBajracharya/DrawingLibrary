@@ -27,13 +27,13 @@ public class TestUnit2 {
     CanvasService canvasServiceImpl = new CanvasServiceImpl();
 
     @Test
-    public void convertToLowerCase() {
+    public void testConvertToLowerCase() {
         char c = 'Z';
         assertEquals('z', Character.toLowerCase(c));
     }
 
     @Test
-    public void findMaxAndMin() {
+    public void testGetMaxMin() {
         Map<String, Integer> coordinates = drawHelper.getMaxMin(8, 3, 2, 9);
         int minX = coordinates.get("minX");
         int minY = coordinates.get("minY");
@@ -46,7 +46,7 @@ public class TestUnit2 {
     }
 
     @Test
-    public void splitWhiteSpace() {
+    public void testSplitWhiteSpace() {
         String input = "   l     13   34";
         String[] result = drawHelper.splitWhitespace(input);
         assertEquals("l", result[0]);
@@ -55,7 +55,7 @@ public class TestUnit2 {
     }
 
     @Test
-    public void remoteUnwantedWhiteSpace() {
+    public void testRemoveUnwantedWhiteSpace() {
         String input = "   c    14    15";
         input = input.trim().replaceAll(" +", " ");
         assertEquals("c 14 15", input);

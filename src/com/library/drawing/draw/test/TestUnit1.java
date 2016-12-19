@@ -26,13 +26,13 @@ public class TestUnit1 {
     CanvasService canvasServiceImpl = new CanvasServiceImpl();
 
     @Test
-    public void convertToLowerCase() {
+    public void testConvertToLowerCase() {
         char c = 'C';
         assertEquals('c', Character.toLowerCase(c));
     }
 
     @Test
-    public void findMaxAndMin() {
+    public void testGetMaxMin() {
         Map<String, Integer> coordinates = drawHelper.getMaxMin(7, 9, 3, 2);
         int minX = coordinates.get("minX");
         int minY = coordinates.get("minY");
@@ -45,7 +45,7 @@ public class TestUnit1 {
     }
 
     @Test
-    public void splitWhitespace() {
+    public void testSplitWhitespace() {
         String input = " c  13   34";
         String[] result = drawHelper.splitWhitespace(input);
         assertEquals("c", result[0]);
@@ -54,7 +54,7 @@ public class TestUnit1 {
     }
 
     @Test
-    public void remoteUnwantedWhiteSpace() {
+    public void testRemoveUnwantedWhiteSpace() {
         String input = "l    14          15";
         input = input.trim().replaceAll(" +", " ");
         assertEquals("l 14 15", input);
@@ -106,6 +106,21 @@ public class TestUnit1 {
         assertEquals('+', canvas[2][4]);
         assertEquals('+', canvas[3][4]);
         assertEquals('+', canvas[4][4]);
+        assertEquals('\0', canvas[1][1]);
+    }
+
+    @Test
+    public void testDrawLine() {
+        char[][] canvas = new char[5][5];
+        Map<String, Integer> coordinates = new HashMap<>();
+        coordinates.put("minX", 2);
+        coordinates.put("minY", 0);
+        coordinates.put("maxY", 2);
+        coordinates.put("maxX", 0);
+        canvas = lineServiceImpl.drawLine(canvas, coordinates);
+        assertEquals('+', canvas[2][0]);
+        assertEquals('+', canvas[1][2]);
+        assertEquals('+', canvas[0][2]);
         assertEquals('\0', canvas[1][1]);
     }
 

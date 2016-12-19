@@ -180,11 +180,11 @@ public class DrawController {
                 Boolean isInsideRectangle = rectangleServiceImpl.isInsideRectangle(x, y, coordinates);
                 if (isInsideRectangle) {
                     canvas = drawServiceImpl.collision(canvas, y, x, c);
-
-                } else {
-                    canvas = drawServiceImpl.fillAll(canvas, c);
-                    canvas = drawServiceImpl.removeFill(canvas, coordinates);
-                }
+                    displayServiceImpl.display(canvas);
+                    break;
+                } /*
+                   * else { canvas = drawServiceImpl.fillAll(canvas, c); canvas = drawServiceImpl.removeFill(canvas, coordinates); }
+                   */
 
             } else if (Character.toLowerCase(firstCharacter) == 'l') {
                 canvas = drawServiceImpl.fillAll(canvas, c);
