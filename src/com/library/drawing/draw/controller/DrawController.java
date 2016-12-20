@@ -146,7 +146,7 @@ public class DrawController {
         } else if (minX < 0 || maxX >= width || minY < 0 || maxY >= height) {
             System.out.println(OUTSIDE_BOUNDARY_MESSAGE);
         } else {
-            canvas = lineServiceImpl.line(canvas, coordinates);
+            canvas = lineServiceImpl.lineDraw(canvas, coordinates);
         }
         displayServiceImpl.display(canvas);
     }
