@@ -52,7 +52,7 @@ public class LineServiceImpl implements LineService {
      * {@inheritDoc}
      */
     @Override
-    public char[][] line(char[][] canvas, Map<String, Integer> coordinates) {
+    public char[][] lineDraw(char[][] canvas, Map<String, Integer> coordinates) {
         Integer minX = coordinates.get("minX");
         Integer minY = coordinates.get("minY");
         Integer maxX = coordinates.get("maxX");

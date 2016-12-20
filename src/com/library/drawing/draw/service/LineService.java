@@ -29,7 +29,7 @@ public interface LineService {
      * @return {@link Canvas} {@link Array}
      * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
      */
-    public char[][] line(char[][] canvas, Map<String, Integer> coordinates);
+    public char[][] lineDraw(char[][] canvas, Map<String, Integer> coordinates);
 
     /**
      * fills coordinates with empty characters
