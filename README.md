@@ -49,5 +49,21 @@ Hence eclipse IDE is enough to run the application.
 2) Allows user to draw multiple rectangles and lines inside the canvas.
 3) If lines form a shape of rectangle with canvas boundary then it is treated as rectangle.
    for example: if canvas[5][5] and line is l 4 0 4 4 then it is treated as rectangle
-4) while bucket fill it checks and fills accordingly
+4) while bucket fill it checks the point and fills accordingly
+5) Interactive user interface. 
+6) various Error and Warning messages
+7) Implements various Test cases.
+```
+
+***Trade off***
+```
+1) While Bucket fill if the coordinate x y matches with line or rectangle coordinate then it doesnot fill.
+   for example: if x=2 and y=2, and if one of the rectangle coordinate is 2,2 then it doesnot fill
+2) If user tries to run bucket fill command multiple times: then it will fill only new area.
+3) Line forms a rectangle with canvas.
+```
+
+***Test***
+```
+Tests are written for various cases and can be run from TestRunner.java.
 ```
