@@ -2,7 +2,8 @@
 
 ***Drawing Library***
 ```
-Drawing library is a small console application developed in Java which doesnot use any other libraries.
+Drawing library is a small console application developed in Java which accepts various commands from user and draws 
+different shapes accordingly.
 ```
 
 ***Introduction***
@@ -61,6 +62,13 @@ Hence eclipse IDE is enough to run the application.
    for example: if x=2 and y=2, and if one of the rectangle coordinate is 2,2 then it doesnot fill
 2) If user tries to run bucket fill command multiple times: then it will fill only new area.
 3) Line forms a rectangle with canvas.
+```
+
+***Design Decisions***
+```
+1) While drawing a line there are two possible ways to reach from point A to B. Hence this application 
+   moves towards x-axis then towards y-axis to reach point B. 
+2) Above decision (point 1) is not applied if the line forms a rectangle with the canvas boundary.
 ```
 
 ***Test***
