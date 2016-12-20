@@ -122,4 +122,44 @@ public class TestUnit1 {
         assertEquals(Boolean.FALSE, isRectangle);
     }
 
+    @Test
+    public void testRemoveFill() {
+        char[][] canvas = new char[5][5];
+        canvas[3][3] = '*';
+        canvas[2][2] = '*';
+        Map<String, Integer> coordinates = new HashMap<>();
+        coordinates.put("minX", 1);
+        coordinates.put("minY", 1);
+        coordinates.put("maxX", 4);
+        coordinates.put("maxY", 4);
+        canvas = drawServiceImpl.removeFill(canvas, coordinates);
+        assertEquals(' ', canvas[3][3]);
+        assertEquals(' ', canvas[2][2]);
+    }
+
+    @Test
+    public void testFillAll() {
+        char[][] canvas = new char[2][2];
+        canvas[0][1] = ' ';
+        canvas[1][0] = ' ';
+        char c = '%';
+        canvas = drawServiceImpl.fillAll(canvas, c);
+        assertEquals('%', canvas[0][1]);
+        assertEquals('%', canvas[1][0]);
+    }
+
+    @Test
+    public void testRemoveLineFill() {
+        char[][] canvas = new char[5][5];
+        int width = 4;
+        int height = 4;
+        Map<String, Integer> coordinates = new HashMap<>();
+        coordinates.put("minX", 0);
+        coordinates.put("maxX", 2);
+        coordinates.put("minY", 1);
+        coordinates.put("maxY", 4);
+        canvas = lineServiceImpl.removeLineFill(canvas, coordinates, width, height);
+        assertEquals(' ', canvas[2][1]);
+    }
+
 }
