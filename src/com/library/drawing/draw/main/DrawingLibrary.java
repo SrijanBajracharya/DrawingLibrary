@@ -14,7 +14,7 @@ public class DrawingLibrary {
 
         System.out.println("Welcome to Draw Library");
         System.out.println("Instructions:");
-        System.out.println("Commands:\n 1.To draw Canvas: c height width \n 2.To draw Rectangle: R x1 y1 x2 y2");
+        System.out.println("Commands:\n 1.To draw Canvas: c height width \n 2.To draw Rectangle: r x1 y1 x2 y2");
         System.out.println(" 3.To draw Line: l x1 y1 x2 y2 \n 4.For bubble fill: b x y c where c is the character you want to fill with");
         System.out.println(" 5.To Quit: q");
         Scanner scanner = new Scanner(System.in);
