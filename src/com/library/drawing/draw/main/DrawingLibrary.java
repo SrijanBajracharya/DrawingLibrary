@@ -7,6 +7,9 @@ import com.library.drawing.draw.helper.DrawHelper;
 
 public class DrawingLibrary {
 
+    public static final String ERROR_MESSAGE = "First of all you need to draw a canvas. Thank you";
+    public static final String ERROR_COMMAND_MESSAGE = "Command is not correct. Please reload the program and try again. Thank you";
+
     public static void main(String[] args) {
 
         System.out.println("Welcome to Draw Library");
@@ -19,7 +22,9 @@ public class DrawingLibrary {
         String[] splitString = DrawHelper.splitWhitespace(input);
         char character = splitString[0].charAt(0);
         if (Character.toLowerCase(character) != 'c') {
-            System.out.println("First of all you need to draw a canvas. Thank you");
+            System.out.println(ERROR_MESSAGE);
+        } else if (Character.toLowerCase(character) != 'c' && splitString.length > 3) {
+            System.out.println(ERROR_COMMAND_MESSAGE);
         } else {
             DrawController drawController = new DrawController();
             drawController.draw(splitString, character);

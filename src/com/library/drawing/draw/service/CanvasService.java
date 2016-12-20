@@ -7,6 +7,7 @@ import java.awt.Canvas;
  * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
  *
  */
+@FunctionalInterface
 public interface CanvasService {
 
     /**
