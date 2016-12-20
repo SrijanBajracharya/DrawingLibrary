@@ -85,28 +85,21 @@ public class LineServiceImpl implements LineService {
         Integer maxX = coordinates.get("maxX");
         Integer maxY = coordinates.get("maxY");
         if (minY == 0 && (minX == 0 || maxX >= width - 1 || maxY >= height - 1)) {
-            for (int i = minY + 1; i < maxY; i++) {
-                for (int j = minX + 1; j < maxX; j++) {
-                    canvas[i][j] = ' ';
-                }
-            }
+            canvas = lineFillremove(canvas, minY + 1, maxY, minX + 1, maxX);
         } else if (maxY >= height - 1 && (minX == 0 || maxX >= width - 1 || minY == 0)) {
-            for (int i = minY + 1; i < maxY; i++) {
-                for (int j = minX + 1; j < maxX; j++) {
-                    canvas[i][j] = ' ';
-                }
-            }
+            canvas = lineFillremove(canvas, minY + 1, maxY, minX + 1, maxX);
         } else if (minX == 0 && (minY == 0 || maxX >= width - 1 || maxY >= height - 1)) {
-            for (int i = minY + 1; i < maxY; i++) {
-                for (int j = minX + 1; j < maxX; j++) {
-                    canvas[i][j] = ' ';
-                }
-            }
+            canvas = lineFillremove(canvas, minY + 1, maxY, minX + 1, maxX);
         } else if (maxX >= width - 1 && (minY == 0 || maxY >= height - 1 || minX == 0)) {
-            for (int i = minY + 1; i < maxY; i++) {
-                for (int j = minX + 1; j < maxX; j++) {
-                    canvas[i][j] = ' ';
-                }
+            canvas = lineFillremove(canvas, minY + 1, maxY, minX + 1, maxX);
+        }
+        return canvas;
+    }
+
+    private char[][] lineFillremove(char[][] canvas, int minX, int maxX, int minY, int maxY) {
+        for (int i = minX; i < maxX; i++) {
+            for (int j = minY; j < maxY; j++) {
+                canvas[i][j] = ' ';
             }
         }
         return canvas;
