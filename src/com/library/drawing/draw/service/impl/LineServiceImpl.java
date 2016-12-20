@@ -5,10 +5,18 @@ import java.util.Map;
 import com.library.drawing.draw.helper.DrawHelper;
 import com.library.drawing.draw.service.LineService;
 
+/**
+ * 
+ * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+ *
+ */
 public class LineServiceImpl implements LineService {
 
     DrawHelper drawHelper = new DrawHelper();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public char[][] drawLine(char[][] canvas, Map<String, Integer> coordinates) {
         Integer minX = coordinates.get("minX");
@@ -40,6 +48,9 @@ public class LineServiceImpl implements LineService {
         return canvas;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public char[][] line(char[][] canvas, Map<String, Integer> coordinates) {
         Integer minX = coordinates.get("minX");
@@ -64,6 +75,9 @@ public class LineServiceImpl implements LineService {
         return canvas;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public char[][] removeLineFill(char[][] canvas, Map<String, Integer> coordinates, int width, int height) {
         Integer minX = coordinates.get("minX");

@@ -34,12 +34,14 @@ public class RectangleServiceImpl implements RectangleService {
     }
 
     @Override
-    public Boolean isInsideRectangle(int x, int y, Map<String, Integer> coordinates) {
+    public Boolean isInsideRectangle(int x, int y, Map<String, Integer> coordinates, int height, int width) {
         Integer minX = coordinates.get("minX");
         Integer minY = coordinates.get("minY");
         Integer maxX = coordinates.get("maxX");
         Integer maxY = coordinates.get("maxY");
         if ((x >= minX && x <= maxX) && (y >= minY && y <= maxY)) {
+            return true;
+        } else if ((minX == maxX && (maxY == height - 1 && minY == 0)) || (minY == maxY && (maxX == width - 1 && minX == 0))) {
             return true;
         }
         return false;

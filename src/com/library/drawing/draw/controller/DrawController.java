@@ -38,11 +38,16 @@ public class DrawController {
 
     List<String> rectangles = new ArrayList<>();
 
-    List<String> lines = new ArrayList<>();
-    Integer width;
-    Integer height;
+    private String userCommand;
 
-    String userCommand;
+    public static final String OUTSIDE_BOUNDARY_MESSAGE = "Coordinates are outside the canvas boundary.";
+    public static final String WARNING_MESSAGE = "Warning: You are trying to draw a straight line";
+    public static final String NUMBER_FORMAT_EXCEPTION_MESSAGE =
+            "Command Format Exception:Please Enter according to the command. Thank you";
+    public static final String UNCAUGHT_ERROR = "It's not you it's us. Sorry please reload the program";
+    public static final String QUIT_MESSAGE = "Thank you for using our system.";
+    public static final String COMMAND_INVALID = "Please enter the valid command. Thank you";
+    public static final String NOT_ALLOWED = "You are trying to draw another Canvas";
 
     /**
      * main functions that handles all the commands
@@ -57,8 +62,8 @@ public class DrawController {
         char firstCharacter;
         try {
             if (arrayLength == 3 && (character == 'c' || character == 'C')) {
-                width = Integer.parseInt(inputString[1]);
-                height = Integer.parseInt(inputString[2]);
+                int width = Integer.parseInt(inputString[1]);
+                int height = Integer.parseInt(inputString[2]);
                 canvas = canvasServiceImpl.drawCanvas(height, width);
                 displayServiceImpl.display(canvas);
                 do {
@@ -71,16 +76,20 @@ public class DrawController {
                     } else if (Character.toLowerCase(firstCharacter) == 'r' && splitCommand.length == 5) {
                         drawRectangle(splitCommand, width, height);
                     } else if (Character.toLowerCase(firstCharacter) == 'b' && splitCommand.length == 4) {
-                        drawBubbleFill(splitCommand);
+                        drawBubbleFill(splitCommand, width, height);
                     } else if (Character.toLowerCase(firstCharacter) == 'q') {
-                        System.out.println("Thank you for using our system.");
+                        System.out.println(QUIT_MESSAGE);
+                    } else if (Character.toLowerCase(firstCharacter) == 'c') {
+                        System.out.println(NOT_ALLOWED);
                     } else {
-                        System.out.println("Please enter the valid command. Thank you");
+                        System.out.println(COMMAND_INVALID);
                     }
                 } while (Character.toLowerCase(firstCharacter) != 'q');
             }
         } catch (NumberFormatException e) {
-            System.out.println("Command Format Exception:Please Enter according to the command. Thank you");
+            System.out.println(NUMBER_FORMAT_EXCEPTION_MESSAGE);
+        } catch (Exception e) {
+            System.out.println(UNCAUGHT_ERROR);
         }
     }
 
@@ -104,10 +113,10 @@ public class DrawController {
                 canvas = rectangleServiceImpl.drawRectangle(canvas, x1, y1, x2, y2);
                 displayServiceImpl.display(canvas);
             } else {
-                System.out.println("Coordinates are outside the canvas boundary.");
+                System.out.println(OUTSIDE_BOUNDARY_MESSAGE);
             }
         } else {
-            System.out.println("Warning: You are trying to draw a straight line");
+            System.out.println(WARNING_MESSAGE);
         }
     }
 
@@ -130,11 +139,12 @@ public class DrawController {
         Integer maxX = coordinates.get("maxX");
         Integer maxY = coordinates.get("maxY");
         if (((minX == 0 || maxX == width - 1) && (minY == 0 || maxY == height - 1))
-                || ((maxY == height - 1 || minY == 0) && (minX == 0 || maxX == width - 1))) {
+                || ((maxY == height - 1 || minY == 0) && (minX == 0 || maxX == width - 1))
+                || (minX == maxX && (maxY == height - 1 && minY == 0)) || (minY == maxY && (maxX == width - 1 && minX == 0))) {
             canvas = lineServiceImpl.drawLine(canvas, coordinates);
             rectangles.add("r" + " " + x1 + " " + y1 + " " + x2 + " " + y2);
         } else if (minX < 0 || maxX >= width || minY < 0 || maxY >= height) {
-            System.out.println("Coordinates are outside the canvas boundary.");
+            System.out.println(OUTSIDE_BOUNDARY_MESSAGE);
         } else {
             canvas = lineServiceImpl.line(canvas, coordinates);
         }
@@ -147,16 +157,25 @@ public class DrawController {
      * @param command
      * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
      */
-    public void drawBubbleFill(String[] command) {
+    public void drawBubbleFill(String[] command, int width, int height) {
         Integer x = Integer.parseInt(command[1]);
         Integer y = Integer.parseInt(command[2]);
         char c = command[3].charAt(0);
         canvas = drawServiceImpl.fillAll(canvas, c);
-        drawBubble(rectangles, x, y, c);
-        drawBubble(lines, x, y, c);
+        floodFill(rectangles, x, y, c, height, width);
     }
 
-    public void drawBubble(List<String> figures, int x, int y, char c) {
+    /**
+     * handles different conditions for flood-fill functionality
+     * 
+     * @param figures
+     * @param x
+     * @param y
+     * @param c
+     * @param height
+     * @param width
+     */
+    public void floodFill(List<String> figures, int x, int y, char c, int height, int width) {
         Map<String, Integer> coordinates;
         for (String figure : figures) {
             String[] splitCommand = DrawHelper.splitWhitespace(figure);
@@ -168,10 +187,10 @@ public class DrawController {
             coordinates = DrawHelper.getMaxMin(x1, y1, x2, y2);
 
             if (Character.toLowerCase(firstCharacter) == 'r') {
-                Boolean isInsideRectangle = rectangleServiceImpl.isInsideRectangle(x, y, coordinates);
+                Boolean isInsideRectangle = rectangleServiceImpl.isInsideRectangle(x, y, coordinates, height, width);
                 if (isInsideRectangle) {
-                    remove(c);
-                    canvas = drawServiceImpl.collision(canvas, y, x, c);
+                    remove(c, width, height);
+                    canvas = drawServiceImpl.fillRectangle(canvas, coordinates, c, x, y);
                     break;
                 } else {
                     canvas = drawServiceImpl.removeFill(canvas, coordinates);
@@ -185,9 +204,15 @@ public class DrawController {
         displayServiceImpl.display(canvas);
     }
 
-    public void remove(char c) {
-        for (int i = 0; i < canvas.length; i++) {
-            for (int j = 0; j < canvas[i].length; j++) {
+    /**
+     * removes all character c or replaces character with empty character
+     * 
+     * @param c
+     * @author Srijan Bajracharya<srijan.bajracharya@gmail.com>
+     */
+    public void remove(char c, int width, int height) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 if (canvas[i][j] == c) {
                     canvas[i][j] = ' ';
                 }
